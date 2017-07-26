@@ -1,26 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { PublicDealsComponent } from './public-deals/public-deals.component';
-import { PrivateDealsComponent } from './private-deals/private-deals.component';
 
-const appRoutes: Routes = [
-  
-];
+import { routing, routedComponents } from './app.routing';
+
+import { DealService } from './services/deal.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PublicDealsComponent,
-    PrivateDealsComponent
+    routedComponents
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    FormsModule,
+    routing,
+    HttpModule
   ],
-  providers: [],
+  providers: [
+    DealService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

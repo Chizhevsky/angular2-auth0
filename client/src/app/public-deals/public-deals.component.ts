@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-//import { Deal } from '../deal';
+import { Deal } from '../deal';
 
 //import { AuthService } from '../services/auth.service';
 import { DealService } from '../services/deal.service';
@@ -10,7 +10,7 @@ import { DealService } from '../services/deal.service';
   styleUrls: ['./public-deals.component.css']
 })
 export class PublicDealsComponent implements OnInit {
-  //publicDeals: Deal[];
+  publicDeals: Deal[];
 
   constructor(
     private dealService: DealService

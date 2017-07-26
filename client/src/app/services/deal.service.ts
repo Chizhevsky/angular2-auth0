@@ -3,7 +3,7 @@ import { Headers, Http, Response } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Deal } from './deal';
+import { Deal } from '../deal';
 
 @Injectable()
 export class DealService {
@@ -33,7 +33,7 @@ export class DealService {
 
   private handleError(error: any): Promise<any> {
     console.log('An error occurred', error);
-    return Promise.rejected(error.message || error);
+    return Promise.reject(error.message || error);
   }
 
 }

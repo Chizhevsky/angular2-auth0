@@ -2,12 +2,28 @@
 
 const express = require('express');
 const app = express();
+
+const jwt = require('express-jwt');
+const jwks = require('jwks-rsa');
+
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+
+var authCheck = jwt({
+    secret: jwks.expressJwtSecret({
+        cache: true,
+        rateLimit: true,
+        jwksRequestsPerMinute: 5,
+        jwksUri: "https://achyzheuski.eu.auth0.com/.well-known/jwks.json"
+    }),
+    audience: 'daily-deals-api',
+    issuer: "https://achyzheuski.eu.auth0.com/",
+    algorithms: ['RS256']
+});
 
 app.get('/api/deals/public', (req, res) => {
     let deals = [
@@ -57,7 +73,7 @@ app.get('/api/deals/public', (req, res) => {
     res.json(deals);
 });
 
-app.get('/api/deals/private', (req, res) => {
+app.get('/api/deals/private', authCheck, (req, res) => {
     let deals = [
         {
             id: 14423,
